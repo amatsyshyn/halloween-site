@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Тур у Єгипет з моєю дружиною</title>
+  <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Sans:wght@200..800&amp;display=swap" rel="stylesheet">
+  <style>
+    *, html, body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box !important;
+        font-family: "Momo Trust Sans", sans-serif;
+        color: white;
+    }
+
+    main {
+        width: 100vw;
+        min-width: 100vw;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #000000, #8b0000);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h3 {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inp-container {
+        display: flex;
+    }
+
+    #password-inp {
+        flex-grow: 1;
+        margin-left: 20px;
+        padding: 5px;
+        outline: none;
+        height: 30px;
+        background: rgba(0, 0, 0, 0.1);
+        color: #8b0000;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 6px;
+    }
+
+    button {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 6px;
+        padding: 8px 14px;
+        margin-top: 50px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+  </style>
+</head>
+<body>
+    <main>
+        <h3>Введіть розшифрований пароль</h3>
+        <form>
+            
+            <div class="inp-container">
+                <span>пароль</span>
+                <input id="password-inp" type="password">
+            </div>
+            <button>Підтвердити</button>
+        </form>
+    </main>
+</body>
+</html>
