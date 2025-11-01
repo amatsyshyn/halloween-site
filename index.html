@@ -30,13 +30,14 @@
     }
 
     form {
-        width: 300px;
+        width: 350px;
         display: flex;
         flex-direction: column;
     }
 
     .inp-container {
         display: flex;
+        align-items: center;
     }
 
     #password-inp {
@@ -51,6 +52,11 @@
         border-radius: 6px;
     }
 
+    .error-msg {
+        display: none;
+        margin-top: 8px;
+    }
+
     button {
         background: rgba(255, 255, 255, 0.15);
         color: #fff;
@@ -61,19 +67,73 @@
         cursor: pointer;
         transition: background 0.2s;
     }
+
+    #photos {
+        display: none;
+        flex-direction: column;
+        padding: 5px;
+        gap: 8px;
+    }
+
+    #photos img { max-width: 300px; width: 100%; height: auto; display: block; }
   </style>
 </head>
 <body>
     <main>
-        <h3>Введіть розшифрований пароль</h3>
-        <form>
-            
+        <form id="ps-form" onsubmit="return false;">
+            <h3>Введіть розшифрований пароль</h3>
             <div class="inp-container">
                 <span>пароль</span>
-                <input id="password-inp" type="password">
+                <input id="password-inp" type="password" autocomplete="off" />
             </div>
-            <button>Підтвердити</button>
+            <p id="error-msg-id" class="error-msg">ну тупі, неправильно</p>
+            <!-- button is type=button so it doesn't submit the form by default -->
+            <button type="button" id="confirm-btn">Підтвердити</button>
         </form>
+        <div id="photos" aria-hidden="true">
+            <img src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+            <img src="img/4.jpg" alt="">
+        </div>
     </main>
+    <script type="text/javascript">
+        // safer name for the handler
+        function handleSubmit() {
+            const expectedPs = '6398417';
+            const inputEl = document.getElementById('password-inp');
+
+            // IMPORTANT: compare the element's value, not the element itself
+            const actualValue = inputEl ? inputEl.value.trim() : '';
+
+            const errorEl = document.getElementById('error-msg-id');
+
+            if (!actualValue || actualValue !== expectedPs) {
+                // show error
+                if (errorEl) errorEl.style.display = 'block';
+                return false;
+            }
+
+            // success — hide error, hide form, show photos
+            if (errorEl) errorEl.style.display = 'none';
+            document.getElementById('ps-form').style.display = 'none';
+            const photos = document.getElementById('photos');
+            photos.style.display = 'flex';
+            photos.setAttribute('aria-hidden', 'false');
+
+            return true;
+        }
+
+        // attach handler to the button
+        document.getElementById('confirm-btn').addEventListener('click', handleSubmit);
+
+        // optional: allow Enter key in input to trigger same handler
+        document.getElementById('password-inp').addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSubmit();
+          }
+        });
+    </script>
 </body>
 </html>
