@@ -76,6 +76,7 @@
     }
 
     #photos img { max-width: 300px; width: 100%; height: auto; display: block; }
+    #error { display: flex; flex-direction: column; align-items: center; justify-content: center;}
   </style>
 </head>
 <body>
@@ -87,7 +88,6 @@
                 <input id="password-inp" type="password" autocomplete="off" />
             </div>
             <p id="error-msg-id" class="error-msg">ну тупі, неправильно</p>
-            <!-- button is type=button so it doesn't submit the form by default -->
             <button type="button" id="confirm-btn">Підтвердити</button>
         </form>
         <div id="photos" aria-hidden="true">
@@ -96,25 +96,26 @@
             <img src="img/3.jpg" alt="">
             <img src="img/4.jpg" alt="">
         </div>
+
+        <!-- <div id="error">
+            <img src="img/spinner.gif">
+            <p>FUH! Не робе інтернет, зверніться до провайдера 380962893673</p>
+        </div> -->
     </main>
     <script type="text/javascript">
-        // safer name for the handler
         function handleSubmit() {
             const expectedPs = '6398417';
             const inputEl = document.getElementById('password-inp');
 
-            // IMPORTANT: compare the element's value, not the element itself
             const actualValue = inputEl ? inputEl.value.trim() : '';
 
             const errorEl = document.getElementById('error-msg-id');
 
             if (!actualValue || actualValue !== expectedPs) {
-                // show error
                 if (errorEl) errorEl.style.display = 'block';
                 return false;
             }
 
-            // success — hide error, hide form, show photos
             if (errorEl) errorEl.style.display = 'none';
             document.getElementById('ps-form').style.display = 'none';
             const photos = document.getElementById('photos');
@@ -124,10 +125,8 @@
             return true;
         }
 
-        // attach handler to the button
         document.getElementById('confirm-btn').addEventListener('click', handleSubmit);
 
-        // optional: allow Enter key in input to trigger same handler
         document.getElementById('password-inp').addEventListener('keydown', (e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
